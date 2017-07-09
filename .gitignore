@@ -60,3 +60,5 @@ typings/
 # visual studio elements
 .vs
 
+#OLD Elements
+.OLD
