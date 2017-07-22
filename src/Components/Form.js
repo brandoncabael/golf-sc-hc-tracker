@@ -8,14 +8,50 @@ class Form extends Component {
             courseName: 'No Name',
             courseRating: 0,
             slope: 0,
-            holeCount: []
+            holeCount: 9,
+            playerTotalScore: 0,
+            parTotalScore: 0,
+            playerScoresArray: [],
+            parScoresArray: []
+            
         }
         this.formHandler = this.formHandler.bind(this);
+        this.playerScoresHandler = this.playerScoresHandler.bind(this);
+        this.parScoresHandler = this.parScoresHandler.bind(this);
     }
     formHandler(key, event) {
         const newState = {};
         newState[key] = event.target.value
         this.setState(newState)
+        console.log(this.state)
+        if (key === "holeCount")
+            this.setState({
+                playerTotalScore: 0,
+                parTotalScore: 0,
+                playerScoresArray: [],
+                parScoresArray: []
+            })
+    }
+
+    playerScoresHandler(key, event) {
+        const newState = {};
+        const oldScores = this.state.playerScoresArray;
+        oldScores[key] = parseInt(event.target.value);
+        this.setState({
+            playerScoresArray: oldScores,
+            playerTotalScore: oldScores.reduce((a, b) => ((a || 0)+(b || 0)), 0)
+        })
+        console.log(this.state)
+    }
+
+    parScoresHandler(key, event) {
+        const newState = {};
+        const oldScores = this.state.parScoresArray;
+        oldScores[key] = parseInt(event.target.value);
+        this.setState({
+            parScoresArray: oldScores,
+            parTotalScore: oldScores.reduce((a, b) => ((a || 0) + (b || 0)), 0)
+        })
         console.log(this.state)
     }
 
@@ -25,8 +61,8 @@ class Form extends Component {
         let parScoreArray = [];
         for (let i = 0; i < this.state.holeCount; i++) {
             holeNumber.push(<td>{i + 1}</td>);
-            playerScoreArray.push(<td><input type="number" name="playerScore[]" class="playerScore" /></td>);
-            parScoreArray.push(<td><input type="number" name="parScore[]" class="parScore" /></td>);
+            playerScoreArray.push(<td><input type="number" name={"player" + i} className="playerScore" defaultValue={this.state.playerScoresArray[i] || 0} onKeyUp={e => this.playerScoresHandler(i, e)} /></td>);
+            parScoreArray.push(<td><input type="number" name={"par" + i} className="parScore" defaultValue={this.state.parScoresArray[i] || 0} onKeyUp={e => this.parScoresHandler(i, e)} /></td>);
         }
         return (
             <table className="center">
@@ -37,14 +73,17 @@ class Form extends Component {
                     <tr>
                         <td>Hole:</td>
                         {holeNumber}
+                        <td>Total:</td>
                     </tr>
                     <tr>
                         <td>Par:</td>
                         {parScoreArray}
+                        {this.state.parTotalScore}
                     </tr>
                     <tr>
                         <td>Score:</td>
                         {playerScoreArray}
+                        {this.state.playerTotalScore}
                     </tr>
                 </tbody>
             </table>
