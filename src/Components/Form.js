@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 class Form extends Component {   
     constructor(props) {
         super(props)
+        let dateInit = moment()
         this.state = {
+            startDate: dateInit,
             courseName: 'No Name',
             courseRating: 0,
             slope: 0,
@@ -12,12 +18,13 @@ class Form extends Component {
             playerTotalScore: 0,
             parTotalScore: 0,
             playerScoresArray: [],
-            parScoresArray: []
-            
+            parScoresArray: [],
+            date: null
         }
         this.formHandler = this.formHandler.bind(this);
         this.playerScoresHandler = this.playerScoresHandler.bind(this);
         this.parScoresHandler = this.parScoresHandler.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
     formHandler(key, event) {
         const newState = {};
@@ -31,6 +38,13 @@ class Form extends Component {
                 playerScoresArray: [],
                 parScoresArray: []
             })
+    }
+
+    handleChange(date) {
+        this.setState({
+            startDate: date
+        })
+        console.log(moment(date).format('MM-DD-YYYY'))
     }
 
     playerScoresHandler(key, event) {
@@ -116,8 +130,12 @@ class Form extends Component {
                                 <option value="18">18</option>
                             </select>
                         </label>
+                        <label>
+                            &nbsp;Date Played:
+                            <DatePicker dateFormat="MM-DD-YYYY" selected={this.state.startDate} onChange={this.handleChange} />
+                        </label>
                         <br />
-                        <p> Course Name: {this.state.courseName} Course Rating: {this.state.courseRating} Slope: {this.state.slope} # of Holes: {this.state.holeCount} </p>
+                        <p> Course Name: {this.state.courseName} Course Rating: {this.state.courseRating} Slope: {this.state.slope} # of Holes: {this.state.holeCount} Date: {} </p>
                     </form>
                     <form>
                         {this.renderTable()}

@@ -14,7 +14,11 @@ class App extends Component {
                 </div>
                 <div className="App-Body">
                     <p>
-                        This website will allow you to enter in your round scores, save them, and after a minimum round count has been met, calculate your handicap score.
+                        This website will allow you to:
+                        <ul>
+                            <li>Enter and save your round scores</li>
+                            <li>Calculate your handicap after minimum round count</li>
+                        </ul>
                     </p>
                 </div>
                 <div className="App-Form-Course">
