@@ -8,10 +8,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 class Form extends Component {   
     constructor(props) {
         super(props)
-        let dateInit = moment()
         this.state = {
-            startDate: dateInit,
-            courseName: 'No Name',
+            startDate: moment(),
+            courseName: ' ',
             courseRating: 0,
             slope: 0,
             holeCount: 9,
@@ -44,7 +43,6 @@ class Form extends Component {
         this.setState({
             startDate: date
         })
-        console.log(moment(date).format('MM-DD-YYYY'))
     }
 
     playerScoresHandler(key, event) {
@@ -130,12 +128,13 @@ class Form extends Component {
                                 <option value="18">18</option>
                             </select>
                         </label>
+                        <br />
                         <label>
                             &nbsp;Date Played:
-                            <DatePicker dateFormat="MM-DD-YYYY" selected={this.state.startDate} onChange={this.handleChange} />
+                            <DatePicker dateFormat="MM-DD-YYYY" selected={this.state.startDate} onSelect={this.handleChange} title="Date played: " />
                         </label>
                         <br />
-                        <p> Course Name: {this.state.courseName} Course Rating: {this.state.courseRating} Slope: {this.state.slope} # of Holes: {this.state.holeCount} Date: {} </p>
+                        <p> Course Name: {this.state.courseName} Course Rating: {this.state.courseRating} Slope: {this.state.slope} # of Holes: {this.state.holeCount} Date: {this.state.startDate.format('MM-DD-YYYY')} </p>
                     </form>
                     <form>
                         {this.renderTable()}
