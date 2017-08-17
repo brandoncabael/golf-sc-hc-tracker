@@ -3,6 +3,7 @@ language: node_js
 node_js: 6
 before_install:
 - sudo pip install awscli
+warnings_are_errors: false
 before_deploy:
 - npm run build
 deploy:
