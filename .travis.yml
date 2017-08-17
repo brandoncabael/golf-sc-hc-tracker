@@ -12,7 +12,7 @@ deploy:
   secret_access_key:
     secure: YkiAtY/b+YXnUN+MCUHXJ/Eit2RZRzeWIyZdyeD9llqI5pcsu64db7o/3Y/4/db76x3hPAbHk3ZNUI7JQ5BUBTiWiz3Cag30jz0hprdvPJeJkBAku9KdtZKGLOj2jwtiv+6U1Q/yaHK3JGyDLBOpDGULwiNhe4zVbZpsdsjPtOI4XuDdZ6nDHLIhQ4wYK8bPvLg3OJyPAwkionjRCR/AgDkcmL2vIRVimbtw8xtEWPfiTqsWGyHFHL1CeVzLL6fJJwh2oZV096xnJe5r7X6XNKeBu5F0HEGmhVSqGSSiaHl7M6FNsPZnBcodvzx+1NRkc5Lr25yIbc8EeCnz0DcZ7iwKj6+gzinQNeeiT7Ti1SKAAu2RGBgmx45h3sucYub35Tuwks/L8KIXSJMy4CqIkuJ5oVsBPdosC+Hs1ei5Tt1Nnfyhz+NaC1lshsQoeWzqBwTpBpQhsrGwa55GrRF9kG6XfP9cvV28f1AcMViKK9RQAaX2IcdKqHX+Zbbyqp/fUxRUnpLAzZo6pmmIcWOoyNmYTrSLD4bpJRtdMO2nTpy5DJdzKXoJs2f4Ln6dqvk4mAeYp1FzTLTpD8xgynmyHt6rnvDP662gTocpf33RZh1s9s7VC2hqvw0+2SlEZ91SqnTV6uHAv/X0uUiAGjmRpI3llUjTHuHJc2lFuVo868s=
   bucket: S3://golf.bcc1.us
-  local-dir: "/build"
+  local-dir: build
 
   env:
     - process.env.CI = false
