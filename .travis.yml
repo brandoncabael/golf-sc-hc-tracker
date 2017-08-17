@@ -5,7 +5,7 @@ before_install:
 - sudo pip install awscli
 after_sucess:
 - npm run build
-- aws s3 cp --recursive build/ s3://blog.bcc1.us/
+- aws s3 cp --recursive build/ s3://golf.bcc1.us/
 env:
   global:
   - secure: RSjEs2B5JBP5T+nYU4FeIJ1gPEh7PuHfcYLlSR3w2Hj9jonPWED3tfY4+G/ElXV99JxN2sskyIJoXthurWlbbTuVT6xkKYO4AV2FetYG4k0rQxjKOksIeMqeo2d7fUE6XZGIm+toTRo0EQjTgmFXBLpbvI7MRFwwAbzqTRKWNalo2ndacRzuvvV8LmkncfLTTS8E7iR038AB32NDiWMfaNTtHPkjnzWM4o5+/5gWoavh71ewqPS9T+xMUgBXvZMV073BfuUVoBNLw1ZjKdORecu+IGMHv+4r51XPZSHXhjcuWjSlDU1vKSin0iAErGPnyKZ2Sn4aT+uHaumPUIG6Acg8gHtoziRllp8o84FInApdxDbsfn029AoZGiRuAMDS3ckiF3rPRDppkV4H+FKo9G275vOc0Rj0OVg87gAeKhDdWwlDP9JEvJq4lxKPvrZDZlYB9a0tZN/PNrFBTU7elw6e+U5zRXKjvxCxtA0q2LshPxjrwA2BBTBrW1/J2Kz5MuATzuNYDPfjc8K/4gz20x1KbgI/j4NPCM5uI6EuNBVOhVxQKaZZypAr6g/pEqOsr23w+HQhY9WBTTo2jemYEwDlkMvG8ClHNF3Z5+K0mkyK9JmOCxD+Wp5WtU3iLwVjSszyZLNCoTOHfSjTzb+m/rCkYUzM4WNNo/mjc4TYHS8=
