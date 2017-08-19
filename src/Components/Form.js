@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
@@ -18,12 +17,14 @@ class Form extends Component {
             parTotalScore: 0,
             playerScoresArray: [],
             parScoresArray: [],
-            date: null
+            date: null,
+            handicap: 0
         }
         this.formHandler = this.formHandler.bind(this);
         this.playerScoresHandler = this.playerScoresHandler.bind(this);
         this.parScoresHandler = this.parScoresHandler.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.calculateHandicap = this.calculateHandicap.bind(this);
     }
     formHandler(key, event) {
         const newState = {};
@@ -46,9 +47,8 @@ class Form extends Component {
     }
 
     playerScoresHandler(key, event) {
-        const newState = {};
         const oldScores = this.state.playerScoresArray;
-        oldScores[key] = parseInt(event.target.value);
+        oldScores[key] = parseInt(event.target.value, 10);
         this.setState({
             playerScoresArray: oldScores,
             playerTotalScore: oldScores.reduce((a, b) => ((a || 0)+(b || 0)), 0)
@@ -57,9 +57,8 @@ class Form extends Component {
     }
 
     parScoresHandler(key, event) {
-        const newState = {};
         const oldScores = this.state.parScoresArray;
-        oldScores[key] = parseInt(event.target.value);
+        oldScores[key] = parseInt(event.target.value, 10);
         this.setState({
             parScoresArray: oldScores,
             parTotalScore: oldScores.reduce((a, b) => ((a || 0) + (b || 0)), 0)
@@ -67,14 +66,21 @@ class Form extends Component {
         console.log(this.state)
     }
 
+    calculateHandicap() {
+        let handicapTemp = ((this.state.playerTotalScore - this.state.courseRating) * 113 / this.state.slope)
+        this.setState({
+            handicap: handicapTemp
+        })
+    }
+
     renderTable() {
         let holeNumber = [];
         let playerScoreArray = [];
         let parScoreArray = [];
         for (let i = 0; i < this.state.holeCount; i++) {
-            holeNumber.push(<td>{i + 1}</td>);
-            playerScoreArray.push(<td><input type="number" name={"player" + i} className="playerScore" defaultValue={this.state.playerScoresArray[i] || 0} onKeyUp={e => this.playerScoresHandler(i, e)} /></td>);
-            parScoreArray.push(<td><input type="number" name={"par" + i} className="parScore" defaultValue={this.state.parScoresArray[i] || 0} onKeyUp={e => this.parScoresHandler(i, e)} /></td>);
+            holeNumber.push(<td key={"hole" + (i + 1)}>{i + 1}</td>);
+            playerScoreArray.push(<td key={"playerScore" + (i + 1)}><input type="number" name={"player" + i} className="playerScore" defaultValue={this.state.playerScoresArray[i] || 0} onKeyUp={e => this.playerScoresHandler(i, e)} /></td>);
+            parScoreArray.push(<td key={"parScore" + (i + 1)}><input type="number" name={"par" + i} className="parScore" defaultValue={this.state.parScoresArray[i] || 0} onKeyUp={e => this.parScoresHandler(i, e)} /></td>);
         }
         return (
             <table className="center">
@@ -139,7 +145,7 @@ class Form extends Component {
                     <form>
                         {this.renderTable()}
                     </form>
-
+                    <p>Handicap:&nbsp; {this.state.handicap}&nbsp;Player Score: {(this.state.playerScoreTotal - this.state.parScoreTotal)}</p><button type="button" onClick={this.calculateHandicap}>Calculate</button>
                 </div>
             </div>
 
