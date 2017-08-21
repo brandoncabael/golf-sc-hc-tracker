@@ -18,7 +18,8 @@ class Form extends Component {
             playerScoresArray: [],
             parScoresArray: [],
             date: null,
-            handicap: 0
+            handicap: 0,
+            playerScoreDiff: 0
         }
         this.formHandler = this.formHandler.bind(this);
         this.playerScoresHandler = this.playerScoresHandler.bind(this);
@@ -68,8 +69,10 @@ class Form extends Component {
 
     calculateHandicap() {
         let handicapTemp = ((this.state.playerTotalScore - this.state.courseRating) * 113 / this.state.slope)
+        let playerScoreDiffTemp = (this.state.playerTotalScore - this.state.parTotalScore)
         this.setState({
-            handicap: handicapTemp
+            handicap: handicapTemp,
+            playerScoreDiff: playerScoreDiffTemp
         })
     }
 
@@ -145,7 +148,7 @@ class Form extends Component {
                     <form>
                         {this.renderTable()}
                     </form>
-                    <p>Handicap:&nbsp; {this.state.handicap}&nbsp;Player Score: {(this.state.playerScoreTotal - this.state.parScoreTotal)}</p><button type="button" onClick={this.calculateHandicap}>Calculate</button>
+                    <p>Handicap:&nbsp; {this.state.handicap}&nbsp;Player Score: {this.state.playerScoreDiff}</p><button type="button" onClick={this.calculateHandicap}>Calculate</button>
                 </div>
             </div>
 
