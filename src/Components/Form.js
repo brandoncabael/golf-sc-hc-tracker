@@ -19,7 +19,8 @@ class Form extends Component {
             parScoresArray: [],
             date: null,
             handicap: 0,
-            playerScoreDiff: 0
+            playerScoreDiff: 0,
+            holeScoreDiffArray: []
         }
         this.formHandler = this.formHandler.bind(this);
         this.playerScoresHandler = this.playerScoresHandler.bind(this);
@@ -76,6 +77,10 @@ class Form extends Component {
         })
     }
 
+    calculateHoleScoreDiff(key, event) {
+        
+    }
+
     renderTable() {
         let holeNumber = [];
         let playerScoreArray = [];
@@ -106,6 +111,10 @@ class Form extends Component {
                         {playerScoreArray}
                         {this.state.playerTotalScore}
                     </tr>
+                    <tr>
+                        <td> </td>
+                    </tr>
+
                 </tbody>
             </table>
         )
